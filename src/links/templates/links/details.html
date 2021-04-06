@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% csrf_token %}
+<div class="card mb-3">
+  <img src="{{object.image}}" class="card-img-top" style="width:20%;">
+  <div class="card-body">
+    <h5 class="card-title">{{object.name}}</h5>
+    <p class="card-text"><small class="text-muted">Price ($) : {{object.price}}</small></p>
+      <p class="card-text">Image Url : {{object.image}}</p>
+  </div>
+</div>
+
+<br>
+
+<a href="/"><button>Return To All Products</button></a>
+
+
+
+{% endblock content %}

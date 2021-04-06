@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add an url</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{form|crispy}}
+        <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+   <div class="row">
+     <div class="col text-left">
+       <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">Add</button>
+       <h5>Product count : {{items_no}}</h5>
+     </div>
+   </div>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if qs %}
+       {% for item in qs %}
+
+    <tr>
+      <td scope="row"><img src="{{item.image}}" style="width:50%;"></td>
+      <td scope="row">{{item.pk}}</td>
+      <td>{{item.name}}</td>
+      <td>${{item.price}}</td>
+      <td>{{item.image}}</td>
+      <td><a href="{% url 'details' item.pk %}"><button class="btn btn-primary">Details</button></a></td>
+    </tr>
+
+       {% endfor %}
+
+  </tbody>
+</table>
+   {% else %}
+   <h3>No items being tracked</h3>
+   {% endif %}
+  {% endblock content %}

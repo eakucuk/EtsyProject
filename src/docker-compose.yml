@@ -2,20 +2,20 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     ports:
       - '3306:3306'
     environment:
-       MYSQL_DATABASE: 'my-app-db'
+       MYSQL_DATABASE: 'Etsy'
        MYSQL_USER: 'root'
-       MYSQL_PASSWORD: 'password'
-       MYSQL_ROOT_PASSWORD: 'password'
+       MYSQL_PASSWORD: 'root'
+       MYSQL_ROOT_PASSWORD: 'root'
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:3306
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/my_app_dir
     ports:
-      - "3306:3306"
+      - "8000:8000"
     depends_on:
       - db
